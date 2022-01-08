@@ -8,7 +8,7 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
     <header>
-        <div id="brand"><a href="/">Web Project</a></div>
+        <div id="brand"><a href="#">Web Project</a></div>
             <nav>
               <ul>
                 <li><a href="/home">Home</a></li>
@@ -21,12 +21,40 @@
     </header>
 
     <body>
-    
-    </body>
 
+    <!-- Home Section -->
+      <section id="Home">
+        <div class="Home container">
+
+        </div>
+      </section>
+    <!-- End Home Section -->
+
+    <!-- Products Section -->
+      <section id="Products">
+        <div class="Products container">
+          
+        </div>  
+      </section>
+    <!-- End Products Section -->
+
+
+    <!-- About Section -->
+      <section id="About">
+        <div class="About container">
+          <h1 class="section-title">About</h1>
+          <h2>Med Yessine Baananou</h2>
+          <!-- <p>we are polytec sousse students of computer science and engeneering and we want to help other people learn and succeed by sharing our love for coding and programming.</p>
+          <a href="#" class="cta">Download Resume</a> -->
+        </div>
+      </section>
+    <!-- End About Section -->
+♠
+    </body>
+  <!-- footer Section -->
     <footer>
         <div class="footer-content">
-            <h3>Foolish Developer</h3>
+            <h3>Web Project 2021/2022</h3>
             <ul class="socials">
                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -34,6 +62,7 @@
                 <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
             </ul>
         </div>
+
         <div class="footer-bottom">
             <p>copyright &copy; <a href="#">Baananou</a>  </p>
                     <div class="footer-menu">
@@ -47,6 +76,8 @@
         </div>
 
     </footer>
+  <!-- End footer Section -->
+
 </html>
 
 <style>
