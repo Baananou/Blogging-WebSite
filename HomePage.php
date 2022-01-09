@@ -1,13 +1,10 @@
 <?php ?>
 <?php ?>
 <?php 
-
 session_start();
-
 if (!isset($_SESSION['username'])) {
     header("Location: index.php");
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -33,30 +30,13 @@ if (!isset($_SESSION['username'])) {
 
     <body>
     
-    <!-- Home Section -->
+    <!-- Blog Section -->
       <section id="Home">
         <div class="Home container">
             <div class="itemsH"></div>
         </div>
       </section>
-    <!-- End Home Section -->
-
-    <!-- Products Section -->
-      <section id="Products">
-        <div class="Products container">
-            <div class="itemsH"></div>
-        </div>  
-      </section>
-    <!-- End Products Section -->
-
-
-    <!-- Profile Section -->
-      <section id="Profile">
-        <div class="Profile">
-            <div class="itemsH">
-            </div>
-      </section>
-    <!-- End Profile Section -->
+    <!-- End Blog Section -->
 
     </body>
 
@@ -154,7 +134,7 @@ header a {
 header {
   padding: 0 20px;
   background-color: #1d1f1d;
-  height: 50px;
+  height: 100px;
   display: flex;
   justify-content: space-between;
 }
