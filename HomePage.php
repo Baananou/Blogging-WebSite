@@ -134,7 +134,7 @@ header a {
 header {
   padding: 0 20px;
   background-color: #1d1f1d;
-  height: 100px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
 }
