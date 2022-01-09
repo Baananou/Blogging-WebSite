@@ -21,7 +21,7 @@
     </head>
 
     <header>
-        <div id="brand"><a href="#">Web Project</a></div>
+        <div id="brand"><a href="HomePage.php">Web Project</a></div>
           <center id="brand"><?php echo "Welcome " . $_SESSION['username']; ?> </center>
             <nav>
               <ul>
