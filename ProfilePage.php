@@ -1,55 +1,16 @@
-<?php 
-
-include 'config.php';
-
-
-if (isset($_POST['submit'])) {
-	$username = $_POST['username'];
-	$email = $_POST['email'];
-	$password = md5($_POST['password']);
-	$cpassword = md5($_POST['cpassword']);
-
-	if ($password == $cpassword) {
-		$sql = "SELECT * FROM users WHERE email='$email'";
-		$result = mysqli_query($conn, $sql);
-		if (!$result->num_rows > 0) {
-			$sql = "INSERT INTO users (username, email, password)
-					VALUES ('$username', '$email', '$password')";
-			$result = mysqli_query($conn, $sql);
-			if ($result) {
-				 echo "<script>alert('Wow! User Update Completed.')</script>";
-				$username = "";
-				$email = "";
-				$_POST['password'] = "";
-				$_POST['cpassword'] = "";
-			} else {
-				 echo "<script>alert('Woops! Something Wrong Went.')</script>";
-			}
-		} else {
-			 echo "<script>alert('Woops! Email Already Exists.')</script>";
-		}
-		
-	} else {
-		echo "<script>alert('Password Not Matched.')</script>";
-	}
-}
-
+<?php
+  include 'config.php';
+  session_start();
+  $id = isset($_GET['id']) ? $_GET['id'] : '';
+  $query=mysqli_query($conn,"SELECT * FROM users where id='$id'")or die(mysqli_error($conn));
+  $row=mysqli_fetch_array($query);
 ?>
-
 <?php ?>
 <?php ?>
-<?php 
-
-session_start();
-
-if (!isset($_SESSION['username'])) {
-    header("Location: index.php");
-}
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <title>Profile</title>
         <meta charset="UTF-8">
@@ -58,6 +19,7 @@ if (!isset($_SESSION['username'])) {
         <link href="css/style.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
+
     <header>
         <div id="brand"><a href="#">Web Project</a></div>
           <center id="brand"><?php echo "Welcome " . $_SESSION['username']; ?> </center>
@@ -71,40 +33,80 @@ if (!isset($_SESSION['username'])) {
     </header>
 
     <body>
-    
     <!-- Profile Section -->
       <section id="Profile">
         <div class="Profile">
 	        <div class="container">
-	        	<form action="" method="POST" class="login-email">
-                <?php
-                    $id=$_SESSION['id'];
-                    $sql=" SELECT * FROM users WHERE id='$id'";
-                    $result = mysqli_query($conn , $sql);
-                    $row =mysqli_fetch_array($result);
-                ?>
-                    <p class="login-text" style="font-size: 2rem; font-weight: 800;">Update Profile</p>
-	        		<div class="input-group">
-	        			<input type="text" placeholder="<?php echo $_SESSION['username']; ?>" name="username" value="<?php echo $username; ?>" required>
-	        		</div>
-	        		<div class="input-group">
-	        			<input type="email" placeholder="Email" name="email" value="<?php echo $email; ?>" required>
-	        		</div>
-	        		<div class="input-group">
-	        			<input type="password" placeholder="Password" name="password" value="<?php echo $_POST['password']; ?>" required>
-                    </div>
-                    <div class="input-group">
-	        			<input type="password" placeholder="Confirm Password" name="cpassword" value="<?php echo $_POST['cpassword']; ?>" required>
-	        		</div>
-	        		<div class="input-group">
-	        			<button href= "index.php" name="submit" class="btn">Register</button>
-	        		</div>
-	        		<p class="login-register-text">Have an account? <a href="index.php">Login Here</a>.</p>
-	        	</form>
-	        </div>
-      </section>
-    <!-- End Profile Section -->
+          <form action="" method="post" class="login-email">
+            <p class="login-text" style="font-size: 2rem; font-weight: 800;">Update Profile</p>
+              <?php $username=$_SESSION['username'];
+                $sql=" SELECT * FROM users WHERE username='$username'";
+                $result = mysqli_query($conn , $sql);
+                $row =mysqli_fetch_array($result); ?>
+                <div class="input-group">
+                  <input type="text" id="username" name="username" value="<?php echo $row['username'] ?> " ><br> 
+                </div>
+                <div class="input-group">
+                  <input type="email" id="email" name="email" value="<?php echo $row['email'] ?>" placeholder="Email Address"><br>
+                </div>
+                <div class="input-group">
+                  <input type="password" id="password" name="password" placeholder="Enter New Password" required><br>
+                </div>
+                <div class="input-group">
+	        			  <input type="password" placeholder="Confirm Password" name="cpassword" required >
+	        		  </div>
+                <input type="hidden" value="<?php echo $row['password']; ?>" name="password2">
+                <input type="hidden" name="id_usr" value="<?php echo $row["id"]; ?>">
 
+                <?php if(isset($_GET['updated'])){?>
+                 <p style="color:green;font-weight:700"> Updated successfully ! </p> <?php } elseif (isset($_GET['Exist'])) {?>
+                 <p style="color:red;font-weight:700"> Email exists  ! </p> <?php } ?> 
+            
+                 <div class="input-group">
+                 <button type="submit" name= "submit" class="btn"> Update Profile</button>
+                </div>
+          </form>
+        </div>
+      </section>
+<?php
+if (isset($_POST["submit"])){
+  $usernameA=$_POST['username'];
+  $emailA=$_POST['email'];
+  $mdp=$_POST['password2'];
+  $hash=$_POST['password2'];
+
+  $idn = $_POST["id_usr"];
+
+  if (!empty($_POST["password"] && $_POST["password"] === $_POST["cpassword"])) { $mdp = $_POST["password"];
+                                    $hash = md5($mdp);}
+  else {
+    echo "<script>alert('Woops! Something Wrong Went.')</script>";
+  }
+  // email Update !
+  if ($emailA != "" ) {$query = "SELECT * FROM users where email like '$emailA'";
+                      $verif_email = mysqli_num_rows(mysqli_query($conn, $query));}
+  else {$verif_email = 0;}
+
+  if ($verif_email == 1 && $emailA != $row["email"]) {echo ("<meta http-equiv='refresh' content='0;  URL =ProfilePage.php?Exist'/>");}
+  else{$insert ="UPDATE users set email='$emailA', password='$hash' where id='$idn'";
+       $update=mysqli_query($conn,$insert);}
+  if ($update) {echo ("<meta http-equiv='refresh' content='0;  URL =ProfilePage.php?Updated'/>");}
+  else {echo mysqli_error($conn);}
+
+  // username Update !
+  if ($usernameA != "" ) {$query = "SELECT * FROM users where email like '$usernameA'";
+    $verif_username = mysqli_num_rows(mysqli_query($conn, $query));}
+  else {$verif_username = 0;}
+  if ($verif_username == 1 && $usernameA != $row["username"]) {echo ("<meta http-equiv='refresh' content='0;  URL =ProfilePage.php?Exist'/>");}
+  else{$insert ="UPDATE users set username='$usernameA', password='$hash' where id='$idn'";
+  $update=mysqli_query($conn,$insert);
+  $_SESSION = $_POST;}
+  if ($update) {echo ("<meta http-equiv='refresh' content='0;  URL =ProfilePage.php?Updated'/>");}
+  else {echo mysqli_error($conn);}
+
+  
+}?>
+    <!-- End Profile Section -->
     </body>
 
   <!-- footer Section -->
