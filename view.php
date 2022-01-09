@@ -36,35 +36,23 @@ if (!isset($_SESSION['username'])) {
     <!-- Blog Section -->
     <div class="container mt-5">
 
-<!-- Display any info -->
-<?php if(isset($_REQUEST['info'])){ ?>
-    <?php if($_REQUEST['info'] == "added"){?>
-        <div class="alert alert-success" role="alert">
-            Post has been added successfully
+<?php foreach($query as $q){?>
+    <div class="bg-dark p-5 rounded-lg text-white text-center">
+        <h1><?php echo $q['title'];?></h1>
+
+        <div class="d-flex mt-2 justify-content-center align-items-center">
+            <a href="edit.php?id=<?php echo $q['id']?>" class="btn btn-light btn-sm" name="edit">Edit</a>
+            <form method="POST">
+                <input type="text" hidden value='<?php echo $q['id']?>' name="id">
+                <button class="btn btn-danger btn-sm ml-2" name="delete">Delete</button>
+            </form>
         </div>
-    <?php }?>
-<?php } ?>
 
-<!-- Create a new Post button -->
-<div class="text-center">
-    <a href="create.php" class="btn btn-outline-light" >+ Create a new post</a>
-</div>
+    </div>
+    <p class="mt-5 border-left border-dark pl-3"><?php echo $q['content'];?></p>
+<?php } ?>    
 
-<!-- Display posts from database -->
-<div class="row">
-    <?php foreach($query as $q){ ?>
-        <div class="col-12 col-lg-4 d-flex justify-content-center">
-            <div class="card text-white bg-dark mt-5" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title"><?php echo $q['title'];?></h5>
-                    <p class="card-text"><?php echo substr($q['content'], 0, 50);?>...</p>
-                    <a href="view.php?id=<?php echo $q['id']?>" class="btn btn-light">Read More <span class="text-danger">&rarr;</span></a>
-                </div>
-            </div>
-        </div>
-    <?php }?>
-</div>
-
+<a href="index.php" class="btn btn-outline-dark my-3">Go Home</a>
 </div>
     <!-- End Blog Section -->
 
