@@ -7,7 +7,7 @@ session_start();
 error_reporting(0);
 
 if (isset($_SESSION['username'])) {
-    header("Location: welcome.php");
+    header("Location: HomePage.php");
 }
 
 if (isset($_POST['submit'])) {
@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
 	if ($result->num_rows > 0) {
 		$row = mysqli_fetch_assoc($result);
 		$_SESSION['username'] = $row['username'];
-		header("Location: welcome.php");
+		header("Location: HomePage.php");
 	} else {
 		echo "<script>alert('Woops! Email or Password is Wrong.')</script>";
 	}
@@ -39,6 +39,13 @@ if (isset($_POST['submit'])) {
 
 	<title>Login</title>
 </head>
+<style>
+	body {
+  		background-color: #353836;
+  		color: white;
+  		font-family: "Poppins", sans-serif;
+	}
+</style>
 <body>
 	<div class="container">
 		<form action="login.php" method="POST" class="login-email">

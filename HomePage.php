@@ -1,5 +1,15 @@
 <?php ?>
 <?php ?>
+<?php 
+
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: index.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,19 +21,18 @@
     </head>
     <header>
         <div id="brand"><a href="#">Web Project</a></div>
-          <center id="brand">Username : </center>
+          <center id="brand"><?php echo "Welcome " . $_SESSION['username']; ?> </center>
             <nav>
               <ul>
-                <li><a href="#Home" data-after="Home">Home</a></li>
-                <li><a href="#Products" data-after="Products">Products</a></li>
-                <li><a href="#Profile" data-after="Profile">Profile</a></li>
-                
+                <li><a href="HomePage.php" data-after="Home">Home</a></li>
+                <li><a href="ProfilePage.php" data-after="Profile">Profile</a></li>
+                <li><a style=" border: 2px solid #09c372;  margin: 5px; Padding: 5px; border-radius: 6px;" href="logout.php">Logout</a></li>
               </ul>
             </nav>
     </header>
 
     <body>
-    <div class="itemsV"></div>
+    
     <!-- Home Section -->
       <section id="Home">
         <div class="Home container">
@@ -45,8 +54,6 @@
       <section id="Profile">
         <div class="Profile">
             <div class="itemsH">
-                <div class="item"><img src="PP.jpg" alt=""></div>
-                <div class="item"></div>
             </div>
       </section>
     <!-- End Profile Section -->
@@ -69,9 +76,8 @@
             <p>copyright &copy; <a href="#">Baananou</a>  </p>
                     <div class="footer-menu">
                       <ul class="f-menu">
-                        <li><a href="#Home" data-after="Home">Home</a></li>
-                        <li><a href="#Products" data-after="Products">Products</a></li>
-                        <li><a href="#Profile" data-after="Profile">Profile</a></li>
+                        <li><a href="HomePage.php" data-after="Home">Home</a></li>
+                        <li><a href="ProfilePage.php" data-after="Profile">Profile</a></li>
 
                       </ul>
                     </div>
@@ -105,7 +111,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 70%;
+    width:auto;
     margin: 10px;
     background-color: #09c372;
     border-radius: 5px;

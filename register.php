@@ -24,25 +24,31 @@ if (isset($_POST['submit'])) {
 					VALUES ('$username', '$email', '$password')";
 			$result = mysqli_query($conn, $sql);
 			if ($result) {
-				// echo "<script>alert('Wow! User Registration Completed.')</script>";
+				 echo "<script>alert('Wow! User Registration Completed.')</script>";
 				$username = "";
 				$email = "";
 				$_POST['password'] = "";
 				$_POST['cpassword'] = "";
 			} else {
-				// echo "<script>alert('Woops! Something Wrong Went.')</script>";
+				 echo "<script>alert('Woops! Something Wrong Went.')</script>";
 			}
 		} else {
-			// echo "<script>alert('Woops! Email Already Exists.')</script>";
+			 echo "<script>alert('Woops! Email Already Exists.')</script>";
 		}
 		
 	} else {
-		// echo "<script>alert('Password Not Matched.')</script>";
+		echo "<script>alert('Password Not Matched.')</script>";
 	}
 }
 
 ?>
-
+<style>
+	body {
+  		background-color: #353836;
+  		color: white;
+  		font-family: "Poppins", sans-serif;
+	}
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +78,7 @@ if (isset($_POST['submit'])) {
 				<input type="password" placeholder="Confirm Password" name="cpassword" value="<?php echo $_POST['cpassword']; ?>" required>
 			</div>
 			<div class="input-group">
-				<button name="submit" class="btn">Register</button>
+				<button href= "index.php" name="submit" class="btn">Register</button>
 			</div>
 			<p class="login-register-text">Have an account? <a href="index.php">Login Here</a>.</p>
 		</form>
