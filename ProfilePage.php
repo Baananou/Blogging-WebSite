@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
 					VALUES ('$username', '$email', '$password')";
 			$result = mysqli_query($conn, $sql);
 			if ($result) {
-				 echo "<script>alert('Wow! User Registration Completed.')</script>";
+				 echo "<script>alert('Wow! User Update Completed.')</script>";
 				$username = "";
 				$email = "";
 				$_POST['password'] = "";
@@ -51,7 +51,7 @@ if (!isset($_SESSION['username'])) {
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title></title>
+        <title>Profile</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -76,10 +76,16 @@ if (!isset($_SESSION['username'])) {
       <section id="Profile">
         <div class="Profile">
 	        <div class="container">
-	        	<form action="Update.php" method="POST" class="login-email">
+	        	<form action="" method="POST" class="login-email">
+                <?php
+                    $id=$_SESSION['id'];
+                    $sql=" SELECT * FROM users WHERE id='$id'";
+                    $result = mysqli_query($conn , $sql);
+                    $row =mysqli_fetch_array($result);
+                ?>
                     <p class="login-text" style="font-size: 2rem; font-weight: 800;">Update Profile</p>
 	        		<div class="input-group">
-	        			<input type="text" placeholder="Username" name="username" value="<?php echo $username; ?>" required>
+	        			<input type="text" placeholder="<?php echo $_SESSION['username']; ?>" name="username" value="<?php echo $username; ?>" required>
 	        		</div>
 	        		<div class="input-group">
 	        			<input type="email" placeholder="Email" name="email" value="<?php echo $email; ?>" required>
