@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 09, 2022 at 08:58 PM
+-- Generation Time: Jan 11, 2022 at 10:43 AM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
@@ -35,7 +35,15 @@ CREATE TABLE IF NOT EXISTS `blog_data` (
   `title` varchar(255) NOT NULL,
   `content` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `blog_data`
+--
+
+INSERT INTO `blog_data` (`id`, `title`, `content`) VALUES
+(23, 'dfsdf', 'fsdf'),
+(25, 'sdfgh', '');
 
 -- --------------------------------------------------------
 
@@ -51,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) NOT NULL,
   `bio` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
@@ -63,7 +71,11 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `bio`) VALUES
 (12, 'Maissa', 'Maissa@Maissa.tn', 'b9c3afd5dc73d44170f42190bc1842db', ''),
 (13, 'Med Yessine Baananou ', 'bananoumohamed@live.fr', '202cb962ac59075b964b07152d234b70', ''),
 (14, 'Mohamed ', 'boussaada7ama@com.tn', 'c20ad4d76fe97759aa27a0c99bff6710', ''),
-(15, 'Ahmed Baananou ', 'ahmed@ahmed.tn', 'c20ad4d76fe97759aa27a0c99bff6710', '');
+(15, 'Ahmed Baananou ', 'ahmed@ahmed.tn', 'c20ad4d76fe97759aa27a0c99bff6710', ''),
+(16, 'baananou', 'bananoumohaaamed@live.fr', 'c4ca4238a0b923820dcc509a6f75849b', ''),
+(17, 'beha Mabrouk', 'beha@beha.tn', 'c20ad4d76fe97759aa27a0c99bff6710', ''),
+(18, 'yamina ghobni', 'yamina@yamina', 'c20ad4d76fe97759aa27a0c99bff6710', ''),
+(19, 'Baananou', 'testa@test.com', '202cb962ac59075b964b07152d234b70', '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
