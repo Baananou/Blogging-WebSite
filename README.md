@@ -5,7 +5,7 @@ Hey!
  I present, My First Dynamic Website.
  
  I developed this Website Using, Html, Css, JavaScript, and PHP.
- Using Boostrap framework.
+ Using bootstrap framework.
 
 This Website Is a bloging Website.
 
